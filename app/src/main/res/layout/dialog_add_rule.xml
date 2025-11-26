@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sender Filter:"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/editSenderFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="e.g., GWP or phone number"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:background="#F0F0F0"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Forward To Number:"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/editForwardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="e.g., +995577000000"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:background="#F0F0F0"
+        android:layout_marginBottom="16dp" />
+
+    <CheckBox
+        android:id="@+id/checkEnabled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable this rule"
+        android:textSize="16sp"
+        android:checked="true" />
+
+</LinearLayout>
