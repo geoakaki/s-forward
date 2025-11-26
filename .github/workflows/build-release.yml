@@ -28,8 +28,10 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: Sign APK
+        if: ${{ secrets.SIGNING_KEY != '' }}
         uses: r0adkll/sign-android-release@v1
         id: sign_app
+        continue-on-error: true
         with:
           releaseDirectory: app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
@@ -41,9 +43,16 @@ jobs:
 
       - name: Rename APK
         run: |
-          mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/sms-forwarder.apk || \
-          mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/sms-forwarder.apk || \
-          echo "APK already named correctly"
+          if [ -f app/build/outputs/apk/release/app-release-unsigned-signed.apk ]; then
+            mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/sms-forwarder.apk
+          elif [ -f app/build/outputs/apk/release/app-release.apk ]; then
+            mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/sms-forwarder.apk
+          elif [ -f app/build/outputs/apk/release/app-release-unsigned.apk ]; then
+            mv app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/sms-forwarder.apk
+          else
+            echo "No APK file found!"
+            exit 1
+          fi
 
       - name: Get version from tag
         id: get_version
