@@ -28,7 +28,6 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: Sign APK
-        if: ${{ secrets.SIGNING_KEY != '' }}
         uses: r0adkll/sign-android-release@v1
         id: sign_app
         continue-on-error: true
